@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* body {
+    @apply font-satoshi font-normal text-base text-body bg-whiten relative z-1;
+  } */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+
+
+@layer components {
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .text-body {
+    @apply text-gray-800; /* Replace with your desired styles */
+  }
+
+  .text-bodydark {
+    @apply text-gray-400; /* Replace with your desired styles */
+  }
+
+  .chat-height {
+    @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
+  }
+  .inbox-height {
+    @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
+  }
+}
+
+.custom-input-date::-webkit-calendar-picker-indicator {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+}
+.custom-input-date-1::-webkit-calendar-picker-indicator {
+  background-image: url(./images/icon/icon-calendar.svg);
+}
+.custom-input-date-2::-webkit-calendar-picker-indicator {
+  background-image: url(./images/icon/icon-arrow-down.svg);
+}
+.Toastify__toast-body {
+  padding: 0 !important;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+/* Add this to your global CSS file */
+.menu-sub {
+  transition:
+    max-height 0.2s ease,
+    opacity 0.4s ease;
+  overflow: hidden;
+  opacity: 0;
+  max-height: 0;
+}
+
+.menu-sub-visible {
+  opacity: 1;
+  max-height: 1000px; /* or a value that is high enough to fit your content */
+}
+.header_text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100px; /* Adjust this value as needed */
+  width: 1px; /* Adjust this value as needed */
+  height: 100%; /* Makes it extend the full height of the parent */
+  background-color: red; /* Adjust this color as needed */
+  rotate: 90deg;
+}
+
+.active__item::before {
+  content: '';
+  position: absolute;
+  top: 50%; /* Move the top of the element to 50% of the parent height */
+  left: 0px; /* Adjust this value as needed */
+  width: 2px; /* Adjust this value as needed */
+  height: 60%; /* Adjust this value as needed */
+  background-color: red; /* Adjust this color as needed */
+  transform: translateY(
+    -50%
+  ); /* Move the element up by 50% of its height to center it */
+}
+/* .column__header{
+  border: .8px solid @apply bg-slate-500;
+} */
+
+.column__header::after {
+  content: '';
+  position: absolute;
+  top: 50%; /* Move the top of the element to 50% of the parent height */
+  left: 0px; /* Adjust this value as needed */
+  width: 1px; /* Adjust this value as needed */
+  height: 40%; /* Adjust this value as needed */ /* Adjust this color as needed */
+  transform: translateY(-50%);
+  @apply bg-slate-300;
+}
+.center_absolute__item {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.left__point__clippath {
+  clip-path: polygon(25% 0%, 100% 0, 100% 100%, 25% 100%, 0% 50%);
+}
+.right__point__clippath {
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+}
+
+.blur-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  backdrop-filter: blur(2px); /* Adjust the blur amount */
+  z-index: 40; /* Ensure it is behind the dialog */
+}
+
+.spinner__card {
+  position: absolute;
+  top: 50%; /* Move down 50% of the parent's height */
+  left: 50%; /* Move right 50% of the parent's width */
+  transform: translate(-50%, -50%); /* Move back half of its own size */
+  padding: 20px; /* For aesthetics */
+  z-index: 9999;
+}
+
+/* Hide scroll for filter */
+/* Hide scrollbar but keep scroll functionality for Webkit browsers (Chrome, Safari) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Hide scrollbar for Firefox */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}

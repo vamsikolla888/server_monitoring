@@ -1,0 +1,62 @@
+export const buttonVariants = {
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  DANGER: 'danger',
+  CANCEL: 'cancel',
+};
+
+export const dialogTypes = {
+  COMMONDIALOG: 'commonDialog',
+  DELETECONFIRMATION: 'deleteConfirmation',
+  SESSIONEXPIRED: 'sessionExpired',
+  FORMDIALOG: 'formdialog',
+  TABLESETTINGS: "tableSettings",
+};
+
+export const htmlComponentTypes = {
+  INPUT: 'input',
+  TEXTAREA: 'textarea',
+  SELECT: 'select',
+  CHECKBOX: 'checkbox',
+  RADIO: 'radio',
+  DROPDOWN: 'dropdown',
+  DATEPICKER: 'datePicker',
+  FILEUPLOAD: 'fileUpload',
+  ACCORDION: 'accordion',
+  TABS: 'tabs',
+  CARDS: 'cards',
+  DATATABLE: 'dataTable',
+  FORM: 'form',
+  BUTTON: 'button',
+  TOASTER: 'toaster',
+  LOADER: 'loader',
+  LOADINGSPINNER: 'loadingSpinner',
+  MODAL: 'modal',
+  DIALOG: 'dialog',
+  RADIOGROUP: 'radioGroup',
+  CHECKBOXGROUP: 'checkboxGroup',
+  DATEPICKERRANGE: 'datePickerRange',
+  TIMEPICKER: 'timePicker',
+  TIMEPICKERRANGE: 'timePickerRange',
+  PROGRESSBAR: 'progressBar',
+  TOOLTIP: 'tooltip',
+  CALENDAR: 'calendar',
+  UPLOAD: 'upload',
+};
+
+export const badgeColor = {
+  GREEN: 'green',
+  GRAY: 'gray',
+  CYAN: 'cyan',
+  BLUE: 'blue',
+  INDIGO: 'indigo',
+  VIOLET: 'violet',
+  PURPLE: 'purple',
+  PINK: 'pink',
+  RED: 'red',
+  ROSE: 'rose',
+  ORANGE: 'orange',
+  YELLOW: 'yellow',
+};
