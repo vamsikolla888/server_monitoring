@@ -8,14 +8,21 @@ export default {
   ],
   theme: {
   	extend: {
+		fontFamily: {
+			// montserrat: ["Montserrat", "serif"], // Define the font
+		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+			boxdark: "#1E1E2E", // Define your custom dark background color
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+			header_background: 'hsl(var(--header-background))',
+			header_border: 'hsl(var(--header-border))',
+			main_background: 'hsl(var(--main-background))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -63,7 +70,8 @@ export default {
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
   				border: 'hsl(var(--sidebar-border))',
   				ring: 'hsl(var(--sidebar-ring))'
-  			}
+  			},
+			cancel: '#dc3545',
   		},
   		keyframes: {
   			'accordion-down': {

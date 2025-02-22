@@ -12,9 +12,8 @@ import { showDialog, hideDialog } from '../../redux/reducers/dialogSlice';
 import { useEffect } from 'react';
 import { PrimeInput } from '../form/Inputs';
 import { useForm } from 'react-hook-form';
-import CommonLucideIcon from '../Icons/CommonLucideIcon';
+// import CommonLucideIcon from '../Icons/CommonLucideIcon';
 import CommonPaginator from '../paginator/CommonPaginator';
-import { useGetAllDetailsQuery } from '../../redux/Apislice';
 import {
   buttonVariants,
   dialogTypes,

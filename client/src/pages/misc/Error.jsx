@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Images } from '@/assets/imageImports';
-import CommonButton from '@/common/button/CommonButton';
 const Error = () => {
   return (
     <div className="flex flex-col justify-center items-center text-center text-xl gap-3 py-6">
@@ -24,9 +23,7 @@ const Error = () => {
         to="/"
         className="btn btn-primary mt-10"
       >
-        <CommonButton className={'rounded-md px-10 py-2 bg-primary'}>
-          Go to Home
-        </CommonButton>
+        Go to Home
       </Link>
     </div>
   );

@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface IFiles {
   _id: string;
   name: string;
@@ -7,6 +9,7 @@ export interface IFiles {
   isRoot: boolean;
   parentId: string;
   size: string;
+  noOfFiles: number;
 }
 
 export interface IFilter {
@@ -14,6 +17,7 @@ export interface IFilter {
   sortField?: string;
   direction?: string;
   limit?: number;
+  page?: number;
 }
 
 export interface ICriteria {
@@ -24,4 +28,22 @@ export interface ICriteria {
 
 export interface IFilesResponse {
   files: IFiles[];
+}
+
+export interface FileManagerHistory {
+  href: string;
+  title: string;
+}
+
+export interface IFileManagerContext {
+  fileManagerHistory: FileManagerHistory[] | null
+  setFileManagerHistory: Dispatch<SetStateAction<FileManagerHistory[]>>;
+}
+
+export const defaultFilter = {
+  criteria: [],
+  sortField: "created",
+  direction: "desc",
+  limit: 20,
+  page: 1
 }

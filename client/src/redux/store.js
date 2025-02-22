@@ -1,29 +1,46 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { ApiStore } from './Apislice';
-import Uislice from './reducers/Uislice';
-import dialogSlice from './reducers/dialogSlice';
-
-/**@Redux Persist */
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
-import { combineReducers } from '@reduxjs/toolkit';
+import { fileApiSlice } from './api/files.api';
+import { configurationsApiSlice } from './api/configurations.api';
 
-const reducers = combineReducers({
-  Uislice,
-  dialogSlice,
-  [ApiStore.reducerPath]: ApiStore.reducer,
+// Combine reducers
+const rootReducer = combineReducers({
+  [fileApiSlice.reducerPath]: fileApiSlice.reducer,
+  [configurationsApiSlice.reducerPath]: configurationsApiSlice.reducer
 });
 
+// Persist configuration
 const persistConfig = {
   key: 'root',
-  // version:1,
   storage,
+  whitelist: ['fileApiSlice', 'configurationsApiSlice'], // Ensure correct reducer keys
 };
 
-const persistReducers = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// Configure store
 export const store = configureStore({
-  reducer: persistReducers,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(ApiStore.middleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore redux-persist actions
+        ignoredActions: [
+          'persist/PERSIST',
+          'persist/REHYDRATE',
+          'persist/REGISTER',
+          'persist/PURGE',
+          'persist/FLUSH',
+          'persist/PAUSE'
+        ]
+      }
+    }).concat(
+      fileApiSlice.middleware,
+      configurationsApiSlice.middleware
+    ),
 });
+
+// Persistor - Required for persistence to work
+export const persistor = persistStore(store);
+

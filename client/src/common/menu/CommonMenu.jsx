@@ -1,8 +1,8 @@
 import { forwardRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Menu } from 'primereact/menu';
-import ClickOutside from '@/components/ClickOutside';
-import CommonLucideIcon from '@/Icons/CommonLucideIcon';
+import ClickOutside from '../../components/ClickOutside';
+import CommonLucideIcon from '../Icons/CommonLucideIcon';
 import Overlay from './Overlay';
 // // const CommonMenu = forwardRef(({ children }, ref) => {
 // //     console.log("MENU REF", ref);

@@ -1,4 +1,3 @@
-import CommonLucideIcon from '../Icons/CommonLucideIcon';
 
 const DashboardCard = ({
   children,
@@ -24,17 +23,7 @@ const DashboardCard = ({
         <span
           className={`flex items-center gap-3 text-sm font-medium ${value >= 80 ? 'text-green-600' : value > 20 && value < 80 ? 'text-amber-500' : 'text-red-600'}`}
         >
-          {/* { levelUp ? <CommonLucideIcon name={"trending-up"}/>: <CommonLucideIcon name={"trending-down"} />} */}
-          <CommonLucideIcon
-            name={'battery-charging'}
-            className={
-              value >= 80
-                ? 'text-green-600'
-                : value > 20 && value < 80
-                  ? 'text-amber-500'
-                  : 'text-red-600'
-            }
-          />
+          
           {value}
         </span>
         {/* <span
@@ -60,7 +49,6 @@ const DashboardCard = ({
           )}
           {!levelUp && (
             <>
-            <CommonLucideIcon name={"trending-down"} />
             {20}
             </>
             // <svg

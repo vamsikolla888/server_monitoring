@@ -1,36 +1,21 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { setLoggedUser, setItem, showToast } from './reducers/Uislice';
+import config from '@/config/config';
 import { CommonToastTypes } from '../common/toast/Toast';
-import { getDataFromLocalStorage } from '../utils/localStorage';
-import { showDialog, hideDialog } from './reducers/dialogSlice';
 import { dialogTypes } from '../constants/constants';
-import { get } from './reducers/apiThunkSlice';
+import { toast } from 'sonner';
 
 export const ApiStore = createApi({
   reducerPath: 'apiStore',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:8676/api/',
-    headers: {
-      Authorization:
-        'Bearer ' +
-        getDataFromLocalStorage(
-          'loginCredentials',
-          (obj) => obj['accessToken']
-        ),
-    },
+    baseUrl: config.apiUrl,
+    refetchOnMountOrArgChange: true, 
+    refetchOnFocus: true,
+    refetchOnReconnect: true
   }),
   endpoints: (builder) => ({
     getAllDetails: builder.query({
       query: (url) => ({
         url,
-        headers: {
-          Authorization:
-            'Bearer ' +
-            getDataFromLocalStorage(
-              'loginCredentials',
-              (obj) => obj['accessToken']
-            ),
-        },
       }),
       transformResponse: (response) => {
         return response;
@@ -42,7 +27,7 @@ export const ApiStore = createApi({
           data?.errorCode &&
           data?.errorMessage.includes('Session expired please login again')
         ) {
-          dispatch(showDialog({ type: dialogTypes.SESSIONEXPIRED }));
+          // dispatch(showDialog({ type: dialogTypes.SESSIONEXPIRED }));
         }
       },
     }),
@@ -51,11 +36,6 @@ export const ApiStore = createApi({
         url,
         body,
         method: 'POST',
-        headers: {
-          // Conditionally spread the headers if provided, otherwise set default content-type
-          ...(headers ? headers : { 'Content-Type': 'application/json' }),
-          Authorization: `Bearer ${getDataFromLocalStorage('loginCredentials', (obj) => obj['accessToken'])}`,
-        },
       }),
       transformResponse: (response) => response,
       async onQueryStarted(
@@ -65,42 +45,44 @@ export const ApiStore = createApi({
         if (arg?.url === 'auth/login') {
           let { data } = await queryFulfilled;
           if (data?.respCode) {
-            dispatch(setItem({ key: 'accessToken', value: data.accessToken }));
-            dispatch(setItem({ key: 'loginCredentials', value: data }));
-            dispatch(hideDialog({ type: dialogTypes.SESSIONEXPIRED }));
-            dispatch(
-              showToast({
-                type: CommonToastTypes.SUCCESS,
-                message: data.respMessage,
-              })
-            );
-            dispatch(setLoggedUser({ user: data.details }));
+            // dispatch(setItem({ key: 'accessToken', value: data.accessToken }));
+            // dispatch(setItem({ key: 'loginCredentials', value: data }));
+            // dispatch(hideDialog({ type: dialogTypes.SESSIONEXPIRED }));
+            // dispatch(
+            //   showToast({
+            //     type: CommonToastTypes.SUCCESS,
+            //     message: data.respMessage,
+            //   })
+            // );
+            // dispatch(setLoggedUser({ user: data.details }));
           } else {
-            dispatch(
-              showToast({
-                type: CommonToastTypes.ERROR,
-                message: data.errorMessage,
-              })
-            );
+            // dispatch(
+            //   showToast({
+            //     type: CommonToastTypes.ERROR,
+            //     message: data.errorMessage,
+            //   })
+            // );
           }
 
           // console.log("RES", response);
         } else {
           let { data } = await queryFulfilled;
           if (data?.errorMessage) {
-            dispatch(
-              showToast({
-                type: CommonToastTypes.ERROR,
-                message: data.errorMessage,
-              })
-            );
+            toast.error(data?.errorMessage);
+            // dispatch(
+            //   showToast({
+            //     type: CommonToastTypes.ERROR,
+            //     message: data.errorMessage,
+            //   })
+            // );
           } else {
-            dispatch(
-              showToast({
-                type: CommonToastTypes.SUCCESS,
-                message: data.respMessage,
-              })
-            );
+            toast.success(data.respMessage);
+            // dispatch(
+            //   showToast({
+            //     type: CommonToastTypes.SUCCESS,
+            //     message: data.respMessage,
+            //   })
+            // );
           }
         }
         console.log('GET STATE', getState());
@@ -118,15 +100,6 @@ export const ApiStore = createApi({
         url,
         body,
         method: 'PUT', // Change to PUT method
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization:
-            'Bearer ' +
-            getDataFromLocalStorage(
-              'loginCredentials',
-              (obj) => obj['accessToken']
-            ),
-        },
       }),
       transformResponse: (response) => response,
       async onQueryStarted(
@@ -148,28 +121,28 @@ export const ApiStore = createApi({
           let { data } = await queryFulfilled;
           if (data?.respCode) {
             console.log('DELETE SUCCESS', data.details);
-            dispatch(
-              showToast({
-                type: CommonToastTypes.SUCCESS,
-                message: data.respMessage,
-              })
-            );
+            // dispatch(
+            //   showToast({
+            //     type: CommonToastTypes.SUCCESS,
+            //     message: data.respMessage,
+            //   })
+            // );
           } else {
-            dispatch(
-              showToast({
-                type: CommonToastTypes.ERROR,
-                message: data.errorMessage,
-              })
-            );
+            // dispatch(
+            //   showToast({
+            //     type: CommonToastTypes.ERROR,
+            //     message: data.errorMessage,
+            //   })
+            // );
           }
         } catch (error) {
           console.error('Error occurred during the PUT operation:', error);
-          dispatch(
-            showToast({
-              type: CommonToastTypes.ERROR,
-              message: 'Something went wrong',
-            })
-          );
+          // dispatch(
+          //   showToast({
+          //     type: CommonToastTypes.ERROR,
+          //     message: 'Something went wrong',
+          //   })
+          // );
         }
 
         console.log('GET STATE', getState());
@@ -187,15 +160,6 @@ export const ApiStore = createApi({
       query: ({ url }) => ({
         url,
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization:
-            'Bearer ' +
-            getDataFromLocalStorage(
-              'loginCredentials',
-              (obj) => obj['accessToken']
-            ),
-        },
       }),
       transformResponse: (response) => response,
       async onQueryStarted(
@@ -207,28 +171,28 @@ export const ApiStore = createApi({
 
           if (data?.respCode) {
             console.log('DELETE SUCCESS', data.details);
-            dispatch(
-              showToast({
-                type: CommonToastTypes.SUCCESS,
-                message: data.respMessage,
-              })
-            );
+            // dispatch(
+            //   showToast({
+            //     type: CommonToastTypes.SUCCESS,
+            //     message: data.respMessage,
+            //   })
+            // );
           } else {
-            dispatch(
-              showToast({
-                type: CommonToastTypes.ERROR,
-                message: data.errorMessage,
-              })
-            );
+            // dispatch(
+            //   showToast({
+            //     type: CommonToastTypes.ERROR,
+            //     message: data.errorMessage,
+            //   })
+            // );
           }
         } catch (error) {
           console.error('Delete operation failed:', error);
-          dispatch(
-            showToast({
-              type: CommonToastTypes.ERROR,
-              message: 'An error occurred while deleting',
-            })
-          );
+          // dispatch(
+          //   showToast({
+          //     type: CommonToastTypes.ERROR,
+          //     message: 'An error occurred while deleting',
+          //   })
+          // );
         }
 
         console.log('GET STATE', getState());

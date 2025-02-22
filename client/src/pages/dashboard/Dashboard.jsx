@@ -1,14 +1,9 @@
 import DashboardCard from '@/common/cards/DashboardCard';
-import CommonLucideIcon from '@/common/Icons/CommonLucideIcon';
-import { useGetAllDetailsQuery } from '@/redux/Apislice';
-import { getDataFromLocalStorage } from '@/utils/localStorage';
 import ChartOne from '@/common/charts/ChartOne';
 import ChartTwo from '@/common/charts/ChartTwo';
 import ChartThree from '@/common/charts/ChartThree';
 
 const Dashboard = () => {
-  const { data } = useGetAllDetailsQuery('users');
-  // console.log(getDataFromLocalStorage("accessToken"))
   const cardData = [
     {
       title: 'Smart TV',
@@ -46,19 +41,6 @@ const Dashboard = () => {
   return (
     <div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        {cardData.map(
-          ({ icon, iconClassName, levelUp, value, storageUsed, title }) => (
-            <DashboardCard
-              key={icon}
-              value={value}
-              levelUp={levelUp}
-              title={title}
-              storageUsed={storageUsed}
-            >
-              <CommonLucideIcon name={icon} className={iconClassName} />
-            </DashboardCard>
-          )
-        )}
       </div>
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
         <ChartOne />

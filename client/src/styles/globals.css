@@ -1,0 +1,88 @@
+.p-datatable-custom {
+    @apply rounded-lg shadow-sm;
+}
+
+.p-datatable-custom .p-datatable-thead > tr > th {
+    @apply bg-slate-50 text-slate-700 font-semibold dark:bg-boxdark dark:text-white transition-colors duration-200;
+}
+
+.p-datatable-custom .p-datatable-tbody > tr {
+    @apply transition-colors duration-200;
+}
+
+.p-datatable-custom .p-datatable-tbody > tr:hover {
+    @apply bg-slate-50 dark:bg-slate-700/50;
+}
+
+.p-datatable-custom .p-datatable-tbody > tr > td {
+    @apply border-slate-200 dark:border-slate-700;
+}
+
+.p-datatable-custom .p-checkbox .p-checkbox-box {
+    @apply border-slate-300 dark:border-slate-600 rounded;
+}
+
+.p-datatable-custom .p-checkbox .p-checkbox-box.p-highlight {
+    @apply bg-blue-500 border-blue-500;
+}
+
+.p-datatable-custom .p-column-filter {
+    @apply text-slate-400 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-200;
+}
+
+/* Override PrimeReact's default sort icons */
+.p-datatable-custom .p-sortable-column-icon {
+    display: none !important;
+}
+
+.p-datatable-custom .p-sortable-column {
+    @apply cursor-pointer;
+}
+
+/* Sort icons styling */
+.p-datatable-custom .p-sortable-column .sort-icons {
+    @apply opacity-0 transition-opacity duration-200;
+}
+
+.p-datatable-custom .p-sortable-column:hover .sort-icons {
+    @apply opacity-50;
+}
+
+/* Active sort state */
+ .p-sortable-column.p-highlight .sort-icons {
+    @apply opacity-100;
+}
+
+
+/* Adjust the column header content alignment */
+.p-datatable-custom .p-column-header-content {
+    @apply justify-between;
+}
+
+/* Adjust filter icon position */
+.p-datatable-custom .p-column-filter {
+    @apply ml-2;
+} 
+.p-datatable-custom .p-datatable-footer {
+    display: none !important;
+}
+
+
+.left__point__clippath {
+    clip-path: polygon(25% 0%, 100% 0, 100% 100%, 25% 100%, 0% 50%);
+  }
+.right__point__clippath {
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+}
+
+/* Sidebar transitions */
+.sidebar-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Tooltip styles */
+.tooltip {
+  @apply absolute left-14 px-2 py-1 bg-gray-900 text-white text-sm
+         rounded opacity-0 invisible group-hover:opacity-100 
+         group-hover:visible transition-all duration-200;
+}

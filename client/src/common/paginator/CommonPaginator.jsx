@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { Paginator } from 'primereact/paginator';
-import { Divider } from 'antd';
+// import { Divider } from 'antd';
 import CommonButton from '../button/CommonButton';
-import CommonMultiStateCheckbox from '../form/multiStateCheckbox/CommonMultiStateCheckbox';
+// import CommonMultiStateCheckbox from '../form/multiStateCheckbox/CommonMultiStateCheckbox';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPagination } from '../../redux/reducers/Uislice';
+// import { setPagination } from '../../redux/reducers/Uislice';
 const CommonPaginator = ({ rows, setRows, first, onPageChange }) => {
-  const dispatch = useDispatch();
-  const { pagination } = useSelector((state) => state.Uislice);
-  console.log('PAGINATION', pagination);
+  // const dispatch = useDispatch();
+  // const { pagination } = useSelector((state) => state.Uislice);
+  // console.log('PAGINATION', pagination);
+  let pagination = { first: 0, rows: 10, page: 1, totalCount: 50 };
   const Template1 = {
     layout: `CurrentPageReport RowsPerPageDropdown PrevPageLink PageLinks NextPageLink`,
     PrevPageLink: (options) => {
@@ -64,7 +65,7 @@ const CommonPaginator = ({ rows, setRows, first, onPageChange }) => {
     RowsPerPageDropdown: (options) => {
       return (
         <div className="me-auto">
-          <CommonMultiStateCheckbox />
+          {/* <CommonMultiStateCheckbox /> */}
         </div>
       );
     },
@@ -78,10 +79,12 @@ const CommonPaginator = ({ rows, setRows, first, onPageChange }) => {
         totalRecords={pagination?.totalCount}
         first={pagination?.first}
         template={Template1}
-        onPageChange={(e) =>
-          dispatch(
-            setPagination({ first: e.first, rows: e.rows, page: e.page + 1 })
-          )
+        onPageChange={(e) => {
+          console.log("e")
+        }
+          // dispatch(
+          //   setPagination({ first: e.first, rows: e.rows, page: e.page + 1 })
+          // )
         }
       />
     </div>
