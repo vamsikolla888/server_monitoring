@@ -14,16 +14,16 @@ export default function (err, req, res, next) {
   if (err instanceof APIError) {
     return res.status(err.statusCode).json({
       status: 'error',
-      message: err.message,
-      code: err.statusCode
+      errorMessage: err.message,
+      errorCode: err.statusCode
     });
   }
 
   if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
     return res.status(400).json({
       status: 'error',
-      message: 'Invalid JSON payload',
-      code: 400
+      errorMessage: 'Invalid JSON payload',
+      errorCode: 400
     });
   }
 
@@ -35,7 +35,7 @@ export default function (err, req, res, next) {
   // Default error
   return res.status(500).json({
     status: 'error',
-    message: 'Internal server error',
-    code: 500
+    errorMessage: 'Internal server error',
+    errorCode: 500
   });
 }

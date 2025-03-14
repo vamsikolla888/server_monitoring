@@ -18,6 +18,7 @@ export interface IFilter {
   direction?: string;
   limit?: number;
   page?: number;
+  globalSearch?: { type: string, value: string } | null;
 }
 
 export interface ICriteria {
@@ -38,6 +39,10 @@ export interface FileManagerHistory {
 export interface IFileManagerContext {
   fileManagerHistory: FileManagerHistory[] | null
   setFileManagerHistory: Dispatch<SetStateAction<FileManagerHistory[]>>;
+  currentDirectoryPath: string | undefined;
+  setCurrentDirectoryPath: Dispatch<SetStateAction<string | undefined>>;
+  search: string | undefined;
+  setSearch: Dispatch<SetStateAction<string | undefined >>;
 }
 
 export const defaultFilter = {

@@ -1,6 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import AvatarComp from './Header/components/Avatar';
+import { DarkModeToggle } from './Header/components/DarkModeToggle';
 
 const Header = ({ toggleSidebar }) => {
   return (
@@ -15,6 +15,7 @@ const Header = ({ toggleSidebar }) => {
         <h1 className="text-lg font-semibold text-gray-800 dark:text-foreground">Monitoring</h1>
       </div>
       <div className="flex items-center gap-4">
+        <DarkModeToggle />
         <AvatarComp />
       </div>
     </header>

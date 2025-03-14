@@ -9,7 +9,7 @@ const Sidebar = ({ isCollapsed }) => {
     <motion.aside
       initial={false}
       animate={{
-        width: isCollapsed ? '4rem' : '16rem',
+        width: isCollapsed ? '4.3rem' : '16rem',
         opacity: 1
       }}
       transition={{ duration: 0.2 }}

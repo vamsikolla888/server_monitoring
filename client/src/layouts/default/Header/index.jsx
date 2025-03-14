@@ -1,8 +1,6 @@
-import { Link } from 'react-router-dom';
-import LogoIcon from "@/assets/images/calendar.png"
 import PropTypes from 'prop-types';
 import Avatar from './components/Avatar';
-import { Menu, ArrowLeftCircle, ArrowRightCircle } from 'lucide-react';
+import { DarkModeToggle } from './components/DarkModeToggle';
 
 const Header = ({ sidebarOpen, setSidebarOpen}) => {
   return (
@@ -21,14 +19,15 @@ const Header = ({ sidebarOpen, setSidebarOpen}) => {
 
         <div className="flex items-center gap-3 2xsm:gap-7">
           <ul className="flex items-center gap-2 2xsm:gap-4">
+            <DarkModeToggle />
             <Avatar />
           </ul>
         </div>
       </div>
     </header>
   );
-};
 
+};
 Header.propTypes = {
   sidebarOpen: PropTypes.bool.isRequired,
   setSidebarOpen: PropTypes.func.isRequired,

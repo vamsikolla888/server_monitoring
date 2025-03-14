@@ -31,6 +31,8 @@ router
   .get(configWindowsFileServerCtrl.get)
   .delete(configWindowsFileServerCtrl._delete)
 
+router.param("configDocumentId", configWindowsFileServerCtrl.load);
+
 
 
 

@@ -12,7 +12,7 @@ interface FileCardProps {
     file: IFiles
 }
 export default function FileCard({ file }: FileCardProps){
-    const { setFileManagerHistory } = useContext(FileManagerContext);
+    const { setFileManagerHistory, setCurrentDirectoryPath } = useContext(FileManagerContext);
     const router = useNavigate();
 
     useEffect(() => {
@@ -27,13 +27,14 @@ export default function FileCard({ file }: FileCardProps){
     const navigateToFolder = (file: IFiles) => {
         if (file.type === "dir") {
             router(`/filemanager/${file._id}`);
-            setFileManagerHistory(prev => ([...prev, { href: `/filemanager/${file._id}`, title: file.name }]))
+            setFileManagerHistory(prev => ([...prev, { href: `/filemanager/${file._id}`, title: file.name }]));
+            setCurrentDirectoryPath(file.path);
         }
     }
     return (
         <div
             key={file._id}
-            className='flex flex-col w-full border-[1px] border-neutral-200 rounded-md shadow-sm px-2 py-1 cursor-pointer hover:bg-gray-50 transition-colors duration-200'
+            className='flex flex-col w-full border-[1px] border-neutral-200 rounded-md shadow-sm px-2 py-1 cursor-pointer hover:bg-gray-50 transition-colors duration-200 dark:bg-main_background dark:border-header_border dark:hover:bg-content_background'
             onDoubleClick={() => navigateToFolder(file)}
         >
             <div className='flex w-full justify-between px-2 pt-3 pb-1'>
@@ -63,24 +64,24 @@ export default function FileCard({ file }: FileCardProps){
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <p className='font-medium text-lg text-slate-800 truncate w-full'>
+                                <p className='font-medium text-lg text-slate-800 dark:text-slate-300 truncate w-full'>
                                     {file.name}
                                 </p>
                             </TooltipTrigger>
                             <TooltipContent
                                 side="top"
-                                className="bg-slate-800 text-white px-3 py-1.5 rounded-md text-sm font-medium shadow-lg border-0"
+                                className="bg-slate-800 text-white dark:text-neutral-300 px-3 py-1.5 rounded-md text-sm font-medium shadow-lg border-0"
                             >
                                 {file.name}
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
                     <div className='flex justify-between w-full items-end mt-1'>
-                        <span className='text-xs text-zinc-500'>
+                        <span className='text-xs text-zinc-500 dark:text-neutral-400'>
                             {file.noOfFiles} Files
                         </span>
                         {file.size && (
-                            <span className="text-slate-700 font-semibold text-sm">
+                            <span className="text-slate-700 dark:text-neutral-400 font-semibold text-sm">
                                 {file.size}
                             </span>
                         )}
@@ -93,20 +94,20 @@ export default function FileCard({ file }: FileCardProps){
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger asChild>
-                                    <p className='font-medium text-base text-slate-800 truncate min-w-0 flex-1'>
+                                    <p className='font-medium text-base text-slate-800 dark:text-neutral-300 truncate min-w-0 flex-1'>
                                         {file.name}
                                     </p>
                                 </TooltipTrigger>
                                 <TooltipContent
                                     side="top"
-                                    className="bg-slate-800 text-white px-3 py-1.5 rounded-md text-sm font-medium shadow-lg border-0"
+                                    className="bg-slate-800 text-white dark:text-neutral-300 px-3 py-1.5 rounded-md text-sm font-medium shadow-lg border-0"
                                 >
                                     {file.name}
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
                         {file.size && (
-                            <span className="text-slate-700 font-semibold text-sm whitespace-nowrap flex-shrink-0">
+                            <span className="text-slate-700 dark:text-neutral-400 font-semibold text-sm whitespace-nowrap flex-shrink-0">
                                 {file.size}
                             </span>
                         )}

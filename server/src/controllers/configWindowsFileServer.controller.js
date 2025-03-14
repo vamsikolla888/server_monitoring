@@ -62,7 +62,7 @@ async function create(req, res, next) {
  */
 async function update(req, res, next) {
   logger.info(`Update Config Windows File Server configDocumentId: ${JSON.stringify(req.params)} -> BODY: ${JSON.stringify(req.body)}`);
-  const response = await configWindowsFileServerService.updateConfigDocument(req);
+  const response = await configWindowsFileServerService.updateConfigDocument(req, res);
   return res.json(response);
 }
 

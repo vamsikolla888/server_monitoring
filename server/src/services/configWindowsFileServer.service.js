@@ -20,7 +20,7 @@ import fileService from "./file.service";
  * @param {import("express").NextFunction} next 
  */
 async function load(req, res, next) {
-    req.configDocument = await File.get(req.params.configDocumentId);
+    req.configDocument = await ConfigWindowsFileServer.get(req.params.configDocumentId);
     next();
 }
 

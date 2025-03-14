@@ -5,3 +5,5 @@ export const configurationSchema = z.object({
     serverIpAddress: z.string().min(1, "Server IP Address required"),
     baseFolder: z.string().min(1, "basefolder path is required")
 })
+
+export type Configuration = z.infer<typeof configurationSchema>;

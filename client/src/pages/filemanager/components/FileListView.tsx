@@ -1,19 +1,34 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Search, Grid, List } from "lucide-react";
 import FileCard from "./FileCard";
 import { IFiles } from "../types/types";
 import { PiFolderOpenDuotone, PiFileTextDuotone } from "react-icons/pi";
-import { useGetFilesQuery } from "@/redux/api/files.api";
+import { useGetFilesQuery, useSearchFilesMutation } from "@/redux/api/files.api";
+import { FileManagerContext } from "../context/FileManagerProvider";
 
 interface FileListViewProps {
-  files: IFiles[];
+  files?: IFiles[];
+  fileId?: string;
+  search?: string;
 }
 
-const FileListView: React.FC<FileListViewProps> = ({ fileId }) => {
+const FileListView: React.FC<FileListViewProps> = ({ fileId, search }: FileListViewProps) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [isListView, setIsListView] = useState(true);
-    const { data, refetch } = useGetFilesQuery(fileId ? { criteria: [{ key: "parentId", value: fileId, type: "eq"}]}: undefined);
-  const filteredFiles = data?.files?.filter(file =>
+  const [isListView, setIsListView] = useState(false);
+  const [files, setFiles] = useState<IFiles[]>([]);
+  // const { data, refetch } = useGetFilesQuery(fileId ? { criteria: [{ key: "parentId", value: fileId, type: "eq"}]}: undefined);
+  const context = useContext(FileManagerContext);
+  const [searchFiles] = useSearchFilesMutation();
+  useEffect (() => {
+    searchFiles({search, directoryPath: context?.currentDirectoryPath}).then(res => {
+      // console.log("RES", res);
+      setFiles(res?.data?.files);
+    })
+  },[])
+  // const filteredFiles = data?.files?.filter(file =>
+  //   file.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+  const filteredFiles = files?.filter(file =>
     file.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -21,22 +36,15 @@ const FileListView: React.FC<FileListViewProps> = ({ fileId }) => {
     <div className="w-full h-full p-6">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center space-x-2">
-          <Search className="w-5 h-5 text-gray-500" />
-          <input
-            type="text"
-            placeholder="Search files"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-3 py-1 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
+
         </div>
-        <button
+        {/* <button
           onClick={() => setIsListView(!isListView)}
           className="flex items-center space-x-1 px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200"
         >
-          {isListView ? <Grid className="w-5 h-5" /> : <List className="w-5 h-5" />}
+          {isListView ? <Grid className="w-4 h-4" /> : <List className="w-4 h-4" />}
           <span>{isListView ? "Grid View" : "List View"}</span>
-        </button>
+        </button> */}
       </div>
 
       {isListView ? (

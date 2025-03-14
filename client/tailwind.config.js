@@ -23,6 +23,8 @@ export default {
 			header_background: 'hsl(var(--header-background))',
 			header_border: 'hsl(var(--header-border))',
 			main_background: 'hsl(var(--main-background))',
+			content_background: 'hsl(var(--content-background))',
+			table_checkbox: 'hsl(var(--table-checkbox))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'

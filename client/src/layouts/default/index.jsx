@@ -17,7 +17,7 @@ const DefaultLayout = () => {
       <Header toggleSidebar={toggleSidebar} />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar isCollapsed={isCollapsed} />
-        <main className="flex-1 overflow-y-auto dark:bg-main_background">
+        <main className="flex-1 overflow-y-auto dark:bg-main_background px-4 py-2">
           <Outlet />
         </main>
       </div>

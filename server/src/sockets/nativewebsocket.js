@@ -18,6 +18,7 @@ export default {
             ws.on("error", err => {
                 console.log("ERR", err);
             })
+            ws.emit("message", { name: "Vamsi Krishna"})
         })
         wss.on("error", err => {
             console.log("GLOBAL ERROR", err);

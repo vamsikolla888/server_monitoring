@@ -16,8 +16,15 @@ export const fileApiSlice = createApi({
                 query: (filter = defaultFilter) => `${endpoints.listFiles}?filter=${JSON.stringify(filter)}`,
                 providesTags: ["Files"]
             }),
+            searchFiles: builder.mutation<{ files: IFiles[] }, { directoryPath?: string, search: string }>({
+                query: (body) => ({
+                    url: `elastic`,
+                    method: "POST",
+                    body: body
+                })
+            })
         }
     }
 })
 
-export const { useGetFilesQuery, usePrefetch } = fileApiSlice;
+export const { useGetFilesQuery, usePrefetch, useSearchFilesMutation } = fileApiSlice;

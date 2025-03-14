@@ -3,11 +3,13 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { fileApiSlice } from './api/files.api';
 import { configurationsApiSlice } from './api/configurations.api';
+import { pm2ApiSlice } from './api/pm2.api';
 
 // Combine reducers
 const rootReducer = combineReducers({
   [fileApiSlice.reducerPath]: fileApiSlice.reducer,
-  [configurationsApiSlice.reducerPath]: configurationsApiSlice.reducer
+  [configurationsApiSlice.reducerPath]: configurationsApiSlice.reducer,
+  [pm2ApiSlice.reducerPath]: pm2ApiSlice.reducer,
 });
 
 // Persist configuration
@@ -37,7 +39,8 @@ export const store = configureStore({
       }
     }).concat(
       fileApiSlice.middleware,
-      configurationsApiSlice.middleware
+      configurationsApiSlice.middleware,
+      pm2ApiSlice.middleware
     ),
 });
 

@@ -32,6 +32,7 @@ export default function ConfigurationForm({ setIsOpen }) {
                     formFields.map((formfield, index) => {
                         return (
                             <FormField
+                                 key={formfield.name}
                                 name={formfield.name}
                                 control={form.control}
                                 render={({ field}) => {
