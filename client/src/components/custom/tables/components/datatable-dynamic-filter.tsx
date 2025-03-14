@@ -12,13 +12,25 @@ import RenderFormElement from "../../form/components/RenderFormElement";
 import { ICustomFormField } from "../../form/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { defaultFilter, IFilter } from "@/pages/filemanager/types/types";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 
 export default function DataTableDynamicFilter() {
     const [open, setIsOpen] = useState<boolean>(false);
     const _context = useContext(TableContext);
 
+    const criteriaSchema = z.object({
+        key: z.string().min(1, 'key is required'),
+        value: z.string().min(1, 'value is required'),
+        type: z.string().min(1, 'type is required'),
+    })
+
+    const filterSchema = z.object({
+        filter: z.array(criteriaSchema)
+    })
     const form = useForm({
+        resolver: zodResolver(filterSchema),
         defaultValues: {
             filter: [
                 { key: "", value: "", type: "eq" },
@@ -38,11 +50,10 @@ export default function DataTableDynamicFilter() {
 
     const getValueField = useCallback((index:number) => {
         const tableField = formValues[index].key;
-        let findTableFilterField = _context?.state?.filterFields.find(item => item.name == tableField) ?? { label: "", placeholder: "Enter a value", type: "text", displayInAddForm: true, displayInEditForm: true, showLabel: false, className: "h-9 text-xs" };
+        let findTableFilterField = _context?.state?.filterFields.find(item => item.name == tableField) ?? { label: "", placeholder: "Enter a value", type: "text", displayInAddForm: true, displayInEditForm: true, showLabel: false, className: "h-9 text-xs placeholder:text-xs" };
         return lodash.omit(findTableFilterField, ["name"]);
     }, [formValues])
 
-    console.log("FORM", form);
 
     /**@DynamicArray to add & remove of fields */
     const { fields, append, remove } = useFieldArray({
@@ -52,8 +63,9 @@ export default function DataTableDynamicFilter() {
 
 
     const clearFilterHandler = () => {
-        _context?.dispatch({ type: "SET_FILTERS", payload: { filter: { criteria: [], page: 1, limit: 20 } }});
+        _context?.dispatch({ type: "SET_FILTERS", payload: { filter: { criteria: [], page: 1, limit: 20, sortField: _context?.state?.filter?.sortField ?? "created" } }});
         form.reset();
+        // setIsOpen(false);
     }
     const applyFilterHandler = (values: any) => {     
         console.log("VALUES", values);   
@@ -90,7 +102,7 @@ export default function DataTableDynamicFilter() {
 
                                     {
                                         fields.map((item, index) => (
-                                            <div className="flex gap-4 items-center px-2">
+                                            <div className="flex gap-4 items-start px-2">
                                                 {
                                                     filterFields.map((field: ICustomFormField) => (
                                                         <>
@@ -105,9 +117,11 @@ export default function DataTableDynamicFilter() {
                                                     key={`filter.${index}.value}`}
                                                     element={{...getValueField(index), name: `filter.${index}.value`}}
                                                 />
-                                                <Button variant={"ghost"} className="border-[.5px]" onClick={() => remove(index)}>
-                                                    <Trash2 className="text-rose-600"/>
-                                                </Button>
+                                                <div className="py-2">
+                                                    <Button variant={"ghost"} className="border-[.5px]" onClick={() => remove(index)}>
+                                                        <Trash2 className="text-rose-600"/>
+                                                    </Button>
+                                                </div>
                                             </div>
                                         ))
                                     }

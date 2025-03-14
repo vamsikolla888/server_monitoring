@@ -8,7 +8,7 @@ const CommonPaginator = () => {
   const _context = useContext(TableContext);
 
   const onPageChange = (event) => {
-    _context?.dispatch({ type: "SET_PAGINATION", payload: { page: event.page + 1 } });
+    _context?.dispatch({ type: "SET_PAGINATION", payload: { page: event.page + 1 , limit: _context?.state?.limit ?? 10 } });
   };
 
   const Template1 = {

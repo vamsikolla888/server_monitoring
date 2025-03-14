@@ -7,14 +7,24 @@ import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import DynamicIcon from '@/components/common/dynamic-icon';
+
+// const navigation = [
+//   {label: "Dashboard", icon: LuLayoutDashboard, href: "/dashboard"},
+//   {label: "PM2", icon: Cpu, href: "/pm2"},
+//   {label: "File Manager", icon: Layout, href: "/filemanager"},
+//   {label: "Configurations", icon: Bolt, href: "/configurations"}
+// ]
+
 
 const navigation = [
-  {label: "Dashboard", icon: LuLayoutDashboard, href: "/dashboard"},
-  {label: "PM2", icon: Cpu, href: "/pm2"},
-  {label: "File Manager", icon: Layout, href: "/filemanager"},
-  {label: "Configurations", icon: Bolt, href: "/configurations"}
-]
+  {label: "Dashboard", icon: "FaInfinity", library: "reactIcons", href: "/dashboard"},
+  {label: "PM2", icon: "Infinity", library: "lucide", href: "/pm2"},
+  {label: "File Manager", icon: "Infinity", library: "lucide", href: "/filemanager"},
+  {label: "Configurations", icon: "Infinity", library: "lucide", href: "/configurations"},
 
+
+]
 const Navigation = ({ isCollapsed }) => {
   const location = useLocation();
 
@@ -39,7 +49,9 @@ const Navigation = ({ isCollapsed }) => {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Icon 
+                    <DynamicIcon
+                      library={navitem.library}
+                      icon={navitem.icon} 
                       className={`
                         size-[1.2rem] min-w-[1.2rem]
                         transition-colors duration-200

@@ -18,7 +18,7 @@ export const tableReducer = (state: ITable, action: TableReducerActions): ITable
             return {
                 ...state,
                 page: action.payload.page,
-                limit: action.payload.limit
+                limit: action.payload.limit,
             };
 
         case "SET_FILTERS":
@@ -101,7 +101,7 @@ export const tableReducer = (state: ITable, action: TableReducerActions): ITable
         case "ALL":
             return {
                 ...state,
-                ...action.payload.data // Properly merges new incoming data to state
+                ...action.payload.data
             };
 
         default:

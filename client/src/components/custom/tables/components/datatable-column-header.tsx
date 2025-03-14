@@ -1,67 +1,57 @@
-// import { ColumnHeaderOptions } from "primereact/column";
-// import { ITableField } from "../types";
-
-
-
-// export default function ColumnHeader({ name, ...props} : ColumnHeaderOptions & ITableField) {
-//     console.log("OPTIONS", props);
-//     const ignoredKeys = ["checkbox"];
-//     return (
-//         <>
-//             {
-//                 !ignoredKeys.includes(name)  && 
-//                 <div className="w-full bg-red-500">
-//                 <span className="text-md font-bold">Vamsi Krishna</span>
-//                 </div>
-//             }
-//         </>
-//     )
-// }
 
 
 import { ColumnHeaderOptions } from "primereact/column";
-import { ITableField } from "../types";
-import { cn } from "@/lib/utils"; // Your utility for class merging, optional
-import { Checkbox } from "primereact/checkbox";
-import { ArrowUp, ArrowDown, ChevronsUpDown } from "lucide-react"; // You can use Lucide or any icon set
+import { ITable, ITableField } from "../types";
+import { cn } from "@/lib/utils";
+import { ArrowUp, ArrowDown, ChevronsUpDown, X } from "lucide-react";
+import { useContext } from "react";
+import { TableContext } from "../context/TableProvider";
 
-interface CustomColumnHeaderProps extends ColumnHeaderOptions, ITableField {}
+interface CustomColumnHeaderProps extends ColumnHeaderOptions, ITableField { }
 
 export default function ColumnHeader({
   name,
+  field,
   column,
   onSort,
-  multiSortMeta,
   sortOrder,
-  selectionMode,
-  tableProps,
   sortable,
   ...props
 }: CustomColumnHeaderProps) {
-    console.log("PROPS", props);
-  const ignoredKeys = ["checkbox"]; // Fields to ignore normal header rendering, like checkbox
+  console.log("PROPS", props);
+  const _context = useContext(TableContext);
+  const ignoredKeys = ["checkbox"];
+  const sortField = _context?.state?.filter?.sortField ?? "created";
+  const direction = _context?.state?.filter?.direction ?? "desc";
+  const filterExists = _context?.state?.filter?.criteria.findIndex(item => item.key === field);
 
-  // For handling sorting (based on PrimeReact sort mechanism)
   const handleSort = () => {
-    if (sortable) {
-      onSort?.({
-        field: column.field,
-        order: sortOrder === 1 ? -1 : 1,
-      });
-    }
+    let newDirection = direction === "desc" ? "asc" : "desc";
+    let sortField = field;
+    _context?.dispatch({ type: "ALL", payload: { data: { filter: { ..._context?.state?.filter, sortField: sortField, direction: newDirection } } as ITable }});
   };
 
-  // Determine sort icon based on current sort state
   const renderSortIcon = () => {
-    if (!sortable) return null;
-    if (sortOrder === 1) return <ArrowUp className="w-4 h-4 ml-2 inline" />;
-    if (sortOrder === -1) return <ArrowDown className="w-4 h-4 ml-2 inline" />;
-    return <ChevronsUpDown className="w-4 h-4 ml-2 inline opacity-50" />;
+    return(
+      <div onClick={handleSort}> 
+        {
+          field === sortField && direction === "asc" 
+          ? <ArrowUp className="w-4 h-4 ml-2 inline" /> : 
+          field === sortField && direction === "desc" ? <ArrowDown className="w-4 h-4 ml-2 inline" /> :
+          <ChevronsUpDown className="w-4 h-4 ml-2 inline opacity-50" />
+        }
+      </div>
+    )
   };
+
+  const clearFilter = (e) => {
+    // _context?.dispatch({ type: "ALL", payload: { filter: {..._context?.state?.filter, criteria: _context?.state?.filter?.criteria.filter(item => item.key !== field )}}})
+    _context?.dispatch({ type: "ALL", payload: { data: { filter: { ..._context?.state?.filter, criteria: _context?.state?.filter?.criteria?.filter(item => item.key !== field)}} as ITable}})
+  }
 
   if (name === "Checkbox") {
     return (
-        <> </>
+      <> </>
     );
   }
 
@@ -69,14 +59,18 @@ export default function ColumnHeader({
     <>
       {!ignoredKeys.includes(name) && (
         <div
-          onClick={handleSort}
           className={cn(
-            "flex items-center justify-between cursor-pointer select-none",
+            "flex items-center justify-between cursor-pointer select-none gap-4 w-max-[100px] h-[30px]",
             sortable && "hover:text-primary transition-all"
           )}
         >
           <span className="text-md font-bold">{name}</span>
-          {renderSortIcon()}
+          {sortable && renderSortIcon()}
+          <div onClick={clearFilter}>
+            {
+              filterExists >=0 && <X className="size-4 text-red-600 flex-1"/>
+            }
+          </div>
         </div>
       )}
     </>

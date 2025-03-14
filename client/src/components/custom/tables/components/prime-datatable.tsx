@@ -1,7 +1,6 @@
 import React, { useContext, useRef } from "react";
 import { DataTable, DataTableSelectionSingleChangeEvent } from "primereact/datatable";
 import { TableContext } from "../context/TableProvider";
-import { EllipsisVertical } from "lucide-react";
 import { Column } from "primereact/column";
 import { ITableContext, ITableField } from "../types";
 import columnStyles from "./datatable-column-styles";
@@ -25,12 +24,15 @@ export default function CustomPrimeTable({ children, results, tableFields }: Cus
     };
 
 
+    console.log("TABLE REF", datatableRef);
+
+
 
     return (
-        <div className="dark:bg-main_background overflow-hidden">
+        <div className="dark:bg-main_background overflow-hidden" ref={datatableRef}>
             {children}
             <DataTable
-                ref={datatableRef}
+                // ref={datatableRef}
                 value={results}
                 selection={state?.selectedRows ?? []}
                 onSelectionChange={onSelectionChange}
@@ -40,8 +42,7 @@ export default function CustomPrimeTable({ children, results, tableFields }: Cus
                 stripedRows
                 rows={10}
                 rowsPerPageOptions={[5, 10, 25]}
-                filterIcon={() => <EllipsisVertical className="w-4 h-4 text-gray-500" />}
-                className="p-datatable-custom"
+                className="p-datatable-custom h-full"
                 showGridlines
                 emptyMessage="No records found"
                 rowHover
@@ -55,10 +56,8 @@ export default function CustomPrimeTable({ children, results, tableFields }: Cus
                     <Column
                         key={field.name}
                         field={field.field}
-                        // header={field.header}
                         header={options => <ColumnHeader {...{...options, ...field }}/>}
                         sortable={field.sortable}
-                        filter={field.filter}
                         body={(data, options) => columnStyles(data, options, field)}
                         headerClassName="dark:bg-content_background text-gray-700 text-xs font-semibold"
                         bodyClassName="text-gray-600 px-4 py-3 text-xs"

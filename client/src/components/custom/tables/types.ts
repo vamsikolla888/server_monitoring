@@ -72,7 +72,7 @@ export type TableReducerActions =
     { type: "UPDATE_FORM_HANDLER", payload: { createHandler: (values: any, setLoading: Dispatch<SetStateAction<boolean>>) => void, updateHandler: (values: any, id: string, setLoading: Dispatch<SetStateAction<boolean>>) => void, deleteHandler: (selectedIds: string[], setLoading: Dispatch<SetStateAction<boolean>>) => void, refetch: () => void }} |
     { type: "OPEN_ALERT", payload: null } |
     { type: "CLOSE_ALERT", payload: null } |
-    { type: "ALL", payload: { data: any }}
+    { type: "ALL", payload: { data: ITable }}
 
 export interface ITableContext {
     dispatch: Dispatch<TableReducerActions>;

@@ -37,12 +37,16 @@ export default function Configurations() {
         criteria: _context?.state?.filter?.criteria as ICriteria[],
         page: _context?.state?.page as number,
         limit: _context?.state?.limit as number,
+        sortField: _context?.state?.filter?.sortField ?? "created",
+        direction: _context?.state?.filter?.direction ?? "desc",
         globalSearch: _context?.state?.filter?.globalSearch 
     }), [
         _context?.state?.filter?.criteria,
         _context?.state?.page,
         _context?.state?.limit,
-        _context?.state?.filter?.globalSearch
+        _context?.state?.filter?.globalSearch,
+        _context?.state?.filter?.sortField,
+        _context?.state?.filter?.direction
     ]);
 
     const { data, refetch } = useGetConfigurationsQuery(queryParams);

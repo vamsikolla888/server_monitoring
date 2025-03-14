@@ -7,7 +7,7 @@ export const tableFields: ITableField[] = [
     { name: 'Server IP Address', field: 'serverIpAddress', header: 'Server IP Address', filter: true, sortable: true, displayInTable: true  },
     { name: 'Base Folder', field: 'baseFolder', header: 'Base Folder', filter: true, sortable: true, displayInTable: true },
     { name: 'created', field: 'created', header: 'Created', filter: false, sortable: true, displayInTable: true, customStyle: "Date" },
-    { name: 'actions', field: 'actions', header: 'Actions', filter: false, sortable: true, displayInTable: true, customStyle: "Actions" },
+    { name: 'actions', field: 'actions', header: 'Actions', filter: false, sortable: false, displayInTable: true, customStyle: "Actions" },
 ];
 
 export const formFields: ICustomFormField[] = [
@@ -18,7 +18,7 @@ export const formFields: ICustomFormField[] = [
 ]
 
 export const tableFilterFields: ICustomFormField[] = [
-  { name: "serverName", placeholder: "Server Name", label: "Server Name", type: "text", displayInAddForm: false, displayInEditForm: false, className: "h-9 text-xs" },
-  { name: "serverIpAddress", placeholder: "Server IP Address", label: "Server IP Address", type: "text", displayInAddForm: false, displayInEditForm: false, className: "h-9 text-xs" },
-  { name: "baseFolder", placeholder: "Base Folder", label: "Base Folder", type: "text", displayInAddForm: false, displayInEditForm: false, className: "h-9 text-xs" },
+  { name: "serverName", placeholder: "Server Name", label: "Server Name", type: "text", displayInAddForm: false, displayInEditForm: false, className: "h-9 text-xs placeholder:text-xs" },
+  { name: "serverIpAddress", placeholder: "Server IP Address", label: "Server IP Address", type: "text", displayInAddForm: false, displayInEditForm: false, className: "h-9 text-xs placeholder:text-xs" },
+  { name: "baseFolder", placeholder: "Base Folder", label: "Base Folder", type: "text", displayInAddForm: false, displayInEditForm: false, className: "h-9 text-xs placeholder:text-xs" },
 ]
