@@ -18,10 +18,10 @@ import DynamicIcon from '@/components/common/dynamic-icon';
 
 
 const navigation = [
-  {label: "Dashboard", icon: "FaInfinity", library: "reactIcons", href: "/dashboard"},
-  {label: "PM2", icon: "Infinity", library: "lucide", href: "/pm2"},
-  {label: "File Manager", icon: "Infinity", library: "lucide", href: "/filemanager"},
-  {label: "Configurations", icon: "Infinity", library: "lucide", href: "/configurations"},
+  {label: "Dashboard", icon: "Infinity", library: "lucide-react", href: "/dashboard"},
+  {label: "PM2", icon: "Infinity", library: "lucide-react", href: "/pm2"},
+  {label: "File Manager", icon: "Infinity", library: "lucide-react", href: "/filemanager"},
+  {label: "Configurations", icon: "Infinity", library: "lucide-react", href: "/configurations"},
 
 
 ]

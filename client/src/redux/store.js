@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import { fileApiSlice } from './api/files.api';
 import { configurationsApiSlice } from './api/configurations.api';
 import { pm2ApiSlice } from './api/pm2.api';
+import { authApiSlice } from './api/auth.api';
 
 // Combine reducers
 const rootReducer = combineReducers({
@@ -40,7 +41,8 @@ export const store = configureStore({
     }).concat(
       fileApiSlice.middleware,
       configurationsApiSlice.middleware,
-      pm2ApiSlice.middleware
+      pm2ApiSlice.middleware,
+      authApiSlice.middleware
     ),
 });
 

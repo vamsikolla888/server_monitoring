@@ -44,7 +44,7 @@ interface IRenderFormElementProps {
     element: ICustomFormField
     className?: string;
 }
-export default function RenderFormElement({ element, className }: IRenderFormElementProps) {
+export default function RenderFormElement({ element: { showLabel = true, ...element}, className }: IRenderFormElementProps) {
     const context = useFormContext();
     const FormElement = getFormElement(element);
     return (
@@ -53,7 +53,7 @@ export default function RenderFormElement({ element, className }: IRenderFormEle
             control={context.control}
             render={({ field }) => (
                 <FormItem className={cn("py-2", className)}>
-                    { element.showLabel && <FormLabel className="text-neutral-800 dark:text-neutral-50">{element.label}</FormLabel> }
+                    { showLabel && <FormLabel className="text-neutral-800 dark:text-neutral-50">{element.label}</FormLabel> }
                     <FormControl>
                         <FormElement {...field } {...element} />
                     </FormControl>

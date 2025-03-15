@@ -1,5 +1,4 @@
 import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
-import SignIn from './auth/SignIn';
 import DefaultLayout from './layouts/default';
 import Error from './pages/misc/Error';
 import FileManager from "@/pages/filemanager";
@@ -14,12 +13,15 @@ const Configurations = lazyLoading("@/pages/configurations/");
 const PM2 = lazyLoading("@/pages/pm2");
 const FilesListView = lazyLoading("@/pages/filemanager/components/FileListView");
 const Dashboard = lazyLoading("@/components/Dashboard");
+const SignIn = lazyLoading("@/pages/auth/sign-in/sign-in");
+const SignUp = lazyLoading("@/pages/auth/sign-up/sign-up");
 
 const routerArr = [
   {
     path: '/auth',
     children: [
       { path: 'signin', element: <SignIn /> },
+      { path: "signup", element: <SignUp /> },
       { path: '*', element: <Navigate to="/auth/signin" replace /> },
     ],
   },
